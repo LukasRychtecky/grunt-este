@@ -54,7 +54,6 @@ module.exports = function (grunt) {
       var doc = jsdom();
       global.window = doc.parentWindow;
       global.document = doc.parentWindow.document;
-
       if (options.useReact) {
           // Lazy preload React.
           // TODO: Don't embed React. It sucks in Node.js. Fix it for Closure.
@@ -62,7 +61,6 @@ module.exports = function (grunt) {
           React = React || goog.global.React;
           global.React = global.window.React = React;
       }
-
 
       var testFiles = this.filesSrc;
 
@@ -81,11 +79,10 @@ module.exports = function (grunt) {
       // Require tests deps.
       testFiles.forEach(function(testFile) {
         var file = testFile.replace('_test.js', '.js');
-        var namespaces = goog.dependencies_.pathToNames[options.prefix + file];
-        for (var namespace in namespaces) {
-          // TODO: For gulp back to manual resolve because uncache
-          // does not work reliable.
-          goog.require(namespace);
+        for (var namespace in goog.dependencies_.nameToPath)
+        {
+          if (goog.dependencies_.nameToPath[namespace] == options.prefix + file)
+            goog.require(namespace);
         }
       });
 

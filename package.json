@@ -28,7 +28,7 @@
     "temporary": "~0.0.5",
     "wrench": "~1.5.1",
     "di": "0.0.1",
-    "jsdom": "~0.10.0"
+    "jsdom": "~1.1.0"
   },
   "devDependencies": {
     "grunt": "~0.4.2",
